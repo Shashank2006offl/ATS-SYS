@@ -90,8 +90,20 @@ def analyze():
         # We no longer use the AI's experience level for ML since the user provides it directly.
         insights.pop("experience_level", None)
 
-        # Pipeline 1: ML model — Salary prediction (now using user's explicit input)
-        salary = predict_salary(jd_clean, experience_level=ml_exp_level, country=country)
+        # Pipeline 1: ML model — Base Market Salary prediction
+        base_salary = predict_salary(jd_clean, experience_level=ml_exp_level, country=country)
+        
+        # Artificially adjust the ML prediction to scale heavily with experience
+        if ml_exp_level == "Junior":
+            salary = int(base_salary * 0.5)
+        elif ml_exp_level == "Mid-level":
+            salary = int(base_salary * 0.75)
+        elif ml_exp_level == "Senior":
+            salary = int(base_salary * 1.0)
+        elif ml_exp_level == "Lead":
+            salary = int(base_salary * 1.25)
+        else:
+            salary = int(base_salary * 1.5)
 
         return jsonify({
             "ats_score": ats_score,
