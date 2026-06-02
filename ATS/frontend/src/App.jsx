@@ -166,7 +166,7 @@ export default function App() {
         <nav className="nav">
           <div className="nav__brand">
             <div className="nav__dot" />
-            <span>ATS Analyzer</span>
+            <span>ProfilePulse</span>
           </div>
           <button className="nav__toggle" onClick={() => setDarkMode(!darkMode)} aria-label="Toggle theme">
             {darkMode ? <Sun size={18} /> : <Moon size={18} />}
@@ -261,7 +261,7 @@ export default function App() {
           </div>
         </div>
 
-        <footer className="footer">© 2026 ATS Analyzer — ML + AI Resume Intelligence</footer>
+        <footer className="footer">© 2026 ProfilePulse — ML + AI Resume Intelligence</footer>
       </div>
     );
   }
@@ -273,7 +273,7 @@ export default function App() {
       <nav className="nav">
         <div className="nav__brand">
           <div className="nav__dot" />
-          <span>ATS Analyzer</span>
+          <span>ProfilePulse</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <span style={{ fontSize: '13px', color: 'var(--text-muted)' }} className="hidden sm:inline">
@@ -465,7 +465,7 @@ export default function App() {
         )}
       </main>
 
-      <footer className="footer">© 2026 ATS Analyzer — ML + AI Resume Intelligence</footer>
+      <footer className="footer">© 2026 ProfilePulse — ML + AI Resume Intelligence</footer>
     </div>
   );
 }
