@@ -140,7 +140,7 @@ export default function App() {
       if (!res.ok) throw new Error(data.error || `Server error ${res.status}`);
       setResults(data);
     } catch (err) {
-      setError(err.message);
+      setError(`${err.message} (Target: ${API_URL})`);
     } finally {
       setIsAnalyzing(false);
     }
