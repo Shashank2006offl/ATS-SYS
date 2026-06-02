@@ -19,6 +19,23 @@
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
+html.dark {
+  --bg: #0a0a0a;
+  --bg-card: #111111;
+  --border: #333333;
+  --border-hover: #666666;
+  --text: #ededed;
+  --text-sub: #a1a1aa;
+  --accent: #ffffff;
+  --accent-hover: #e5e5e5;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Ensure buttons invert properly in dark mode */
+html.dark .btn-analyze {
+  color: #000;
+}
+
 html { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); }
 body { min-height: 100vh; }
 .hidden { display: none; }
