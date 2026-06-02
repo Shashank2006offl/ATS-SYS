@@ -76,6 +76,7 @@ body { min-height: 100vh; }
 
 .field { display: flex; flex-direction: column; gap: 8px; }
 .field__label { font-size: 0.85rem; font-weight: 500; color: var(--text-sub); }
+.form-row { display: flex; gap: 16px; }
 
 /* ── DROPZONE ── */
 .dropzone {
@@ -193,5 +194,8 @@ body { min-height: 100vh; }
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .top-row, .insights-grid { grid-template-columns: 1fr; }
+  .form-row { flex-direction: column; gap: 16px; }
   .main { padding: 32px 16px; }
+  .form-card { padding: 20px; }
+  .hero__title { font-size: 2rem; }
 }

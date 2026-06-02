@@ -342,7 +342,7 @@ export default function App() {
               />
             </div>
 
-            <div style={{ display: 'flex', gap: '16px' }}>
+            <div className="form-row">
               {/* Country Selector */}
               <div className="field" style={{ flex: 1 }}>
                 <label className="field__label">Location / Country</label>
