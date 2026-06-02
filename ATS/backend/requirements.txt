@@ -7,4 +7,4 @@ groq
 reportlab
 gunicorn
 firebase-admin
-
+python-dotenv

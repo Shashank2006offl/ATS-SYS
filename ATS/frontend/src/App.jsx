@@ -15,72 +15,10 @@ import {
   GoogleAuthProvider
 } from 'firebase/auth';
 
-function ScoreRing({ score }) {
-  const radius = 54;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (score / 100) * circumference;
-  const color = score >= 70 ? '#22c55e' : score >= 45 ? '#f59e0b' : '#ef4444';
-
-  return (
-    <div className="score-ring-wrapper">
-      <svg width="140" height="140" viewBox="0 0 140 140">
-        <circle cx="70" cy="70" r={radius} fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="12" />
-        <circle
-          cx="70" cy="70" r={radius} fill="none"
-          stroke={color} strokeWidth="12"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          strokeLinecap="round"
-          transform="rotate(-90 70 70)"
-          style={{ transition: 'stroke-dashoffset 1.2s ease-out, stroke 0.5s' }}
-        />
-      </svg>
-      <div className="score-ring-label">
-        <span className="score-value" style={{ color }}>{score}</span>
-        <span className="score-unit">/ 100</span>
-      </div>
-    </div>
-  );
-}
-
-function InsightCard({ icon: Icon, title, color, children }) {
-  return (
-    <div className={`insight-card insight-card--${color}`}>
-      <div className="insight-card__header">
-        <div className={`insight-card__icon insight-card__icon--${color}`}>
-          <Icon size={18} />
-        </div>
-        <h3 className="insight-card__title">{title}</h3>
-      </div>
-      <div className="insight-card__body">{children}</div>
-    </div>
-  );
-}
-
-function TagList({ items, variant }) {
-  if (!items || items.length === 0) return <p className="empty-tag">None identified.</p>;
-  return (
-    <div className="tag-list">
-      {items.map((item, i) => (
-        <span key={i} className={`tag tag--${variant}`}>{item}</span>
-      ))}
-    </div>
-  );
-}
-
-function ActionList({ items }) {
-  if (!items || items.length === 0) return null;
-  return (
-    <ul className="action-list">
-      {items.map((item, i) => (
-        <li key={i} className="action-list__item">
-          <ChevronRight size={16} className="action-list__icon" />
-          <span>{item}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
+import ScoreRing from './components/ScoreRing';
+import InsightCard from './components/InsightCard';
+import TagList from './components/TagList';
+import ActionList from './components/ActionList';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
