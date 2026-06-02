@@ -164,8 +164,8 @@ export default function App() {
       <div className={`app${darkMode ? ' dark' : ''}`} style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         {/* NAV */}
         <nav className="nav">
-          <div className="nav__brand">
-            <div className="nav__dot" />
+          <div className="nav__brand" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <img src="/logo.png" alt="ProfilePulse Logo" className="nav__logo" onError={(e) => e.target.style.display='none'} />
             <span>ProfilePulse</span>
           </div>
           <button className="nav__toggle" onClick={() => setDarkMode(!darkMode)} aria-label="Toggle theme">
@@ -271,8 +271,8 @@ export default function App() {
     <div className={`app${darkMode ? ' dark' : ''}`}>
       {/* NAV */}
       <nav className="nav">
-        <div className="nav__brand">
-          <div className="nav__dot" />
+        <div className="nav__brand" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <img src="/logo.png" alt="ProfilePulse Logo" className="nav__logo" onError={(e) => e.target.style.display='none'} />
           <span>ProfilePulse</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
