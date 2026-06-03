@@ -379,9 +379,11 @@ export default function App() {
 
       <main className="main">
         {/* HERO */}
-        <div className="hero" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <img src={logoImg} alt="LuminaRole.ai Logo" className="theme-logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ height: '100px', marginRight: '-20px', marginBottom: '12px' }} />
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div className="hero" style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', width: '100%' }}>
+          <div style={{ justifySelf: 'end', marginRight: '-20px' }}>
+            <img src={logoImg} alt="LuminaRole.ai Logo" className="theme-logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ height: '100px', marginBottom: '12px' }} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
             <h1 className="hero__title" style={{ marginBottom: '8px' }}>
               Resume <span className="hero__accent">Intelligence</span>
             </h1>
@@ -389,6 +391,7 @@ export default function App() {
               Analyse. Optimise. Succeed.
             </p>
           </div>
+          <div></div>
         </div>
 
         {!results ? (
