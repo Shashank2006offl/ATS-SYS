@@ -472,6 +472,9 @@ html.dark .stat-badge.success { background-color: rgba(5,150,105,0.15); }
 @media (max-width: 768px) {
   .landing-hero__title { font-size: 3rem; }
   .stats-grid { grid-template-columns: 1fr; }
-  .landing-nav { padding: 16px 24px; }
+  .landing-nav { padding: 12px 16px; }
   .landing-nav__links { display: none; }
+  .landing-nav .btn-text { display: none; }
+  .landing-nav__brand span { font-size: 1.15rem; letter-spacing: -0.5px; }
+  .landing-nav__logo { height: 28px; }
 }
