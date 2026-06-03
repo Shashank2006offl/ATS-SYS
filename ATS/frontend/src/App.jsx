@@ -31,6 +31,7 @@ export default function App() {
   const [file, setFile]                   = useState(null);
   const [isDragging, setIsDragging]       = useState(false);
   const [jobDescription, setJobDescription] = useState('');
+  const [role, setRole]                   = useState('Machine Learning');
   const [country, setCountry]             = useState('United States');
   const [expValue, setExpValue]           = useState(0);
   const [expUnit, setExpUnit]             = useState('Years');
@@ -133,7 +134,7 @@ export default function App() {
     
     setAuthError(null);
     try {
-      const fakeEmail = `${safeUsername.toLowerCase()}@profilepulse.local`;
+      const fakeEmail = `${safeUsername.toLowerCase()}@metrichire.ai.local`;
       const credential = EmailAuthProvider.credential(fakeEmail, setupPassword);
       await linkWithCredential(auth.currentUser, credential);
       await updateProfile(auth.currentUser, { displayName: safeUsername });
@@ -166,6 +167,7 @@ export default function App() {
     formData.append('resume', file);
     formData.append('jd', jobDescription);
     formData.append('country', country);
+    formData.append('role', role);
     formData.append('exp_value', expValue);
     formData.append('exp_unit', expUnit);
     try {
@@ -187,13 +189,13 @@ export default function App() {
     }
   };
 
-  const reset = () => { setFile(null); setJobDescription(''); setCountry('United States'); setExpValue(0); setExpUnit('Years'); setResults(null); setError(null); };
+  const reset = () => { setFile(null); setJobDescription(''); setRole('Machine Learning'); setCountry('United States'); setExpValue(0); setExpUnit('Years'); setResults(null); setError(null); };
 
   // 1. Loading Screen
   if (authLoading) {
     return (
       <div className="auth-fullscreen-loader" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        <img src={logoImg} alt="ProfilePulse Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ marginBottom: 0 }} />
+        <img src={logoImg} alt="MetricHire.ai Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ marginBottom: 0 }} />
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <Loader2 className="spin text-accent" size={24} />
           <p>Loading Intelligence Portal...</p>
@@ -245,8 +247,8 @@ export default function App() {
         {/* NAV */}
         <nav className="nav">
           <div className="nav__brand" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <img src={logoImg} alt="ProfilePulse Logo" className="nav__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" />
-            <span>ProfilePulse</span>
+            <img src={logoImg} alt="MetricHire.ai Logo" className="nav__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" />
+            <span>MetricHire.ai</span>
           </div>
           <button className="nav__toggle" onClick={() => setDarkMode(!darkMode)} aria-label="Toggle theme">
             {darkMode ? <Sun size={18} /> : <Moon size={18} />}
@@ -257,7 +259,7 @@ export default function App() {
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', background: 'radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 60%)' }}>
           <div className="form-card" style={{ maxWidth: '440px', width: '100%', padding: '40px' }}>
             <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-              <img src={logoImg} alt="ProfilePulse Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" />
+              <img src={logoImg} alt="MetricHire.ai Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" />
               <h2 className="hero__title" style={{ fontSize: '28px', marginBottom: '8px', lineHeight: 1.2 }}>
                 Portal <span className="hero__accent">Login</span>
               </h2>
@@ -328,7 +330,7 @@ export default function App() {
           </div>
         </div>
 
-        <footer className="footer">© 2026 ProfilePulse — ML + AI Resume Intelligence</footer>
+        <footer className="footer">© 2026 MetricHire.ai — ML + AI Resume Intelligence</footer>
       </div>
     );
   }
@@ -339,8 +341,8 @@ export default function App() {
       {/* NAV */}
       <nav className="nav">
         <div className="nav__brand" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <img src={logoImg} alt="ProfilePulse Logo" className="nav__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" />
-          <span>ProfilePulse</span>
+          <img src={logoImg} alt="MetricHire.ai Logo" className="nav__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" />
+          <span>MetricHire.ai</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <span style={{ fontSize: '13px', color: 'var(--text-muted)' }} className="hidden sm:inline">
@@ -358,7 +360,7 @@ export default function App() {
       <main className="main">
         {/* HERO */}
         <div className="hero">
-          <img src={logoImg} alt="ProfilePulse Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" />
+          <img src={logoImg} alt="MetricHire.ai Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" />
           <h1 className="hero__title">
             Resume <span className="hero__accent">Intelligence</span>
           </h1>
@@ -411,6 +413,21 @@ export default function App() {
             </div>
 
             <div className="form-row">
+              {/* Role Selector */}
+              <div className="field" style={{ flex: 1 }}>
+                <label className="field__label">Target Role</label>
+                <select
+                  className="textarea"
+                  style={{ height: 'auto', padding: '12px' }}
+                  value={role}
+                  onChange={e => setRole(e.target.value)}
+                >
+                  <option value="Machine Learning">Machine Learning</option>
+                  <option value="Data Science">Data Science</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
               {/* Country Selector */}
               <div className="field" style={{ flex: 1 }}>
                 <label className="field__label">Location / Country</label>
@@ -485,8 +502,8 @@ export default function App() {
               <div className="salary-card">
                 <div className="salary-card__icon"><DollarSign size={22} /></div>
                 <p className="salary-card__label">Predicted Market Salary</p>
-                <p className="salary-card__value">${results.salary?.toLocaleString()}</p>
-                <p className="salary-card__sub">Based on JD features & market data</p>
+                <p className="salary-card__value">{results.salary ? `$${results.salary.toLocaleString()}` : 'N/A'}</p>
+                <p className="salary-card__sub">{results.salary ? 'Based on JD features & market data' : 'Model limited to Machine Learning roles'}</p>
               </div>
             </div>
 

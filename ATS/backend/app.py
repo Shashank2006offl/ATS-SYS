@@ -54,6 +54,7 @@ def analyze():
         resume_file = request.files["resume"]
         jd          = request.form["jd"]
         country     = request.form.get("country", "United States")
+        role        = request.form.get("role", "Machine Learning")
         
         # User Manual Experience Input
         exp_val     = float(request.form.get("exp_value", 0))
@@ -91,19 +92,22 @@ def analyze():
         insights.pop("experience_level", None)
 
         # Pipeline 1: ML model — Base Market Salary prediction
-        base_salary = predict_salary(jd_clean, experience_level=ml_exp_level, country=country)
-        
-        # Artificially adjust the ML prediction to scale heavily with experience
-        if ml_exp_level == "Junior":
-            salary = int(base_salary * 0.5)
-        elif ml_exp_level == "Mid-level":
-            salary = int(base_salary * 0.75)
-        elif ml_exp_level == "Senior":
-            salary = int(base_salary * 1.0)
-        elif ml_exp_level == "Lead":
-            salary = int(base_salary * 1.25)
+        if role == "Machine Learning":
+            base_salary = predict_salary(jd_clean, experience_level=ml_exp_level, country=country)
+            
+            # Artificially adjust the ML prediction to scale heavily with experience
+            if ml_exp_level == "Junior":
+                salary = int(base_salary * 0.5)
+            elif ml_exp_level == "Mid-level":
+                salary = int(base_salary * 0.75)
+            elif ml_exp_level == "Senior":
+                salary = int(base_salary * 1.0)
+            elif ml_exp_level == "Lead":
+                salary = int(base_salary * 1.25)
+            else:
+                salary = int(base_salary * 1.5)
         else:
-            salary = int(base_salary * 1.5)
+            salary = None
 
         return jsonify({
             "ats_score": ats_score,

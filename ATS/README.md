@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧠 ProfilePulse
+# 🧠 MetricHire.ai
 
 ### *Resume Intelligence Platform*
 
@@ -13,15 +13,15 @@
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?style=flat-square&logo=scikit-learn)](https://scikit-learn.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 
-**If ProfilePulse saves you time or lands you an interview, consider giving it a ⭐ — it helps others find the project!**
+**If MetricHire.ai saves you time or lands you an interview, consider giving it a ⭐ — it helps others find the project!**
 
 </div>
 
 ---
 
-## 📖 What is ProfilePulse?
+## 📖 What is MetricHire.ai?
 
-ProfilePulse bridges the gap between candidates and the hiring systems that evaluate them. Most resumes are rejected by Applicant Tracking Systems before a human ever reads them — ProfilePulse tells you exactly why, and precisely how to fix it.
+MetricHire.ai bridges the gap between candidates and the hiring systems that evaluate them. Most resumes are rejected by Applicant Tracking Systems before a human ever reads them — MetricHire.ai tells you exactly why, and precisely how to fix it.
 
 Upload your PDF resume, paste a job description, and get back:
 
@@ -36,7 +36,7 @@ All wrapped in a polished dark-mode interface with glassmorphism aesthetics and 
 ## ✨ Features
 
 ### 📄 Smart Resume Parsing
-Drop in your PDF resume and a job description. ProfilePulse extracts structured data from both and runs them through the analysis pipeline instantly — no manual form-filling.
+Drop in your PDF resume and a job description. MetricHire.ai extracts structured data from both and runs them through the analysis pipeline instantly — no manual form-filling.
 
 ### 📊 ATS Match Scoring
 Get a concrete percentage score measuring how well your resume aligns with the role. Understand which keywords and competencies are landing — and which are missing entirely.
@@ -56,7 +56,7 @@ The AI coaching layer goes beyond keywords to give you human-level feedback:
 | **Action Items** | Prioritized, concrete next steps to improve your resume before you apply |
 
 ### 🔐 Hybrid Authentication
-ProfilePulse uses a layered security model that offers both convenience and security. Users register via Google Sign-In but are required to create a custom username and password, giving them two secure login paths for the same account. See [Authentication Flow](#-authentication-flow) for full details.
+MetricHire.ai uses a layered security model that offers both convenience and security. Users register via Google Sign-In but are required to create a custom username and password, giving them two secure login paths for the same account. See [Authentication Flow](#-authentication-flow) for full details.
 
 ---
 
@@ -93,8 +93,8 @@ ProfilePulse uses a layered security model that offers both convenience and secu
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/profilepulse.git
-cd profilepulse
+git clone https://github.com/your-username/metrichire.git
+cd metrichire
 ```
 
 ---
@@ -164,7 +164,7 @@ npm run dev
 
 ## 🔒 Authentication Flow
 
-ProfilePulse implements a hybrid authentication model designed for both security and usability.
+MetricHire.ai implements a hybrid authentication model designed for both security and usability.
 
 ```
 User Visits App
@@ -197,7 +197,7 @@ User Visits App
 ## 📁 Project Structure
 
 ```
-profilepulse/
+metrichire/
 ├── frontend/                  # React + Vite client
 │   ├── src/
 │   │   ├── components/        # UI components
@@ -247,9 +247,9 @@ Contributions are welcome. Please open an issue first to discuss what you'd like
 
 ## ⭐ Support the Project
 
-If you found ProfilePulse useful, please consider starring the repository — it takes one second and makes a real difference in helping others discover the project.
+If you found MetricHire.ai useful, please consider starring the repository — it takes one second and makes a real difference in helping others discover the project.
 
-[![Star on GitHub](https://img.shields.io/github/stars/your-username/profilepulse?style=social)](https://github.com/your-username/profilepulse)
+[![Star on GitHub](https://img.shields.io/github/stars/your-username/metrichire?style=social)](https://github.com/your-username/metrichire)
 
 ---
 
@@ -261,6 +261,6 @@ Distributed under the MIT License. See [`LICENSE`](LICENSE) for details.
 
 <div align="center">
 
-Built with 🧠 by the ProfilePulse team
+Built with 🧠 by the MetricHire.ai team
 
 </div>
