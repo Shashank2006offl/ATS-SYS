@@ -332,9 +332,11 @@ html.dark .btn-text { color: #f3f4f6; }
 .landing-hero {
   text-align: center;
   max-width: 900px;
-  margin-bottom: 100px;
+  min-height: 70vh;
+  margin-bottom: 160px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 

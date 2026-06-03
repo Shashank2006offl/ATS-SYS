@@ -87,6 +87,17 @@ export default function LandingPage({ onSignIn }) {
 
           </div>
         </section>
+
+        {/* ── ABOUT / DISCLAIMER SECTION ── */}
+        <section className="landing-about" style={{ marginTop: '80px', padding: '40px', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '16px', maxWidth: '900px', margin: '80px auto 40px auto', textAlign: 'center' }}>
+          <h2 style={{ fontSize: '1.5rem', marginBottom: '16px', color: 'var(--text)' }}>About LuminaRole.ai</h2>
+          <p style={{ color: 'var(--text-sub)', lineHeight: 1.6, fontSize: '1.05rem', maxWidth: '800px', margin: '0 auto' }}>
+            LuminaRole.ai is an experimental platform built to help candidates align their profiles with specific job requirements. 
+            <strong> Disclaimer:</strong> The underlying AI model is not trained to be strictly accurate or flawless. 
+            The ATS scoring and feedback provided are estimations intended for advisory purposes only, and may occasionally exhibit inconsistencies. 
+            Please use these insights as a helpful guide rather than definitive career advice.
+          </p>
+        </section>
       </main>
     </div>
   );

@@ -13,6 +13,35 @@ def get_ai_insights(resume_text, jd_text):
     It generates the ATS match score based on deep semantic understanding
     of the career objective, experience, skills, and framing.
     """
+    
+    def is_gibberish(text):
+        if not text or len(text.strip()) < 30:
+            return True
+        words = text.split()
+        if not words: return True
+        avg_len = sum(len(w) for w in words) / len(words)
+        if avg_len > 15:
+            return True
+        return False
+        
+    if is_gibberish(resume_text) or is_gibberish(jd_text):
+        return {
+            "ats_score": 0,
+            "experience_level": "entry",
+            "career_objective": {
+                "alignment": "Invalid input detected.",
+                "recommendation": "Please provide a valid, legible resume and job description."
+            },
+            "experience": {
+                "relevance": "N/A",
+                "framing": "N/A"
+            },
+            "strengths": [],
+            "gaps": ["The provided text appears to be random characters or gibberish. Cannot analyze."],
+            "action_items": ["Upload a real resume.", "Paste a real job description."],
+            "overall_assessment": "Analysis aborted due to invalid or nonsensical input."
+        }
+
     prompt = f"""
 You are a highly critical, expert ATS (Applicant Tracking System) and strict senior technical recruiter.
 
