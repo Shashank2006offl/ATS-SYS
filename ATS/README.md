@@ -63,20 +63,20 @@ Fitfolio.ai uses a layered security model that offers both convenience and secur
 ## 🛠️ Tech Stack
 
 ### Frontend
-| Layer | Technology |
-|---|---|
-| Framework | [React](https://react.dev/) via [Vite](https://vitejs.dev/) |
-| Styling | Vanilla CSS — CSS Variables, Glassmorphism, Micro-animations |
-| Icons | [Lucide React](https://lucide.dev/) |
-| Auth Client | [Firebase Authentication](https://firebase.google.com/docs/auth) (Google OAuth + linked credentials) |
+| Layer | Technology | Description |
+|---|---|---|
+| **Framework** | [React](https://react.dev/) + [Vite](https://vitejs.dev/) | Core UI library bundled via Vite for lightning-fast HMR and optimized builds. |
+| **Styling** | Vanilla CSS | Pure CSS implementation utilizing modern variables, glassmorphism, and micro-animations. |
+| **Icons** | [Lucide React](https://lucide.dev/) | Clean, consistent, and customizable SVG icon pack. |
+| **Auth Client** | [Firebase Auth](https://firebase.google.com/docs/auth) | Manages Google OAuth and linking custom Username/Password credentials. |
 
 ### Backend
-| Layer | Technology |
-|---|---|
-| API Framework | [Python](https://www.python.org/) / [Flask](https://flask.palletsprojects.com/) |
-| ML Model | `scikit-learn` — `RandomForestRegressor` for salary prediction and JD feature extraction |
-| AI / NLP | Generative AI (Anthropic / OpenAI) for qualitative resume coaching |
-| Auth Middleware | Firebase Admin SDK — Bearer Token verification on all protected routes |
+| Layer | Technology | Description |
+|---|---|---|
+| **API Framework** | [Python](https://www.python.org/) + [Flask](https://flask.palletsprojects.com/) | Lightweight, synchronous WSGI web application framework for API routes. |
+| **ML Model** | `scikit-learn` | Utilizes `RandomForestRegressor` for data-science specific salary prediction. |
+| **AI / NLP** | Generative AI APIs | Powers the qualitative resume coaching, gap analysis, and JD feature extraction. |
+| **Auth Middleware** | Firebase Admin SDK | Enforces Bearer Token verification on all protected endpoints to secure the API. |
 
 ---
 
@@ -117,6 +117,9 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+> [!CAUTION]
+> **Security Risk:** Never commit your `.env` or `serviceAccountKey.json` files to version control! Ensure both of these files are added to your `backend/.gitignore` before pushing to GitHub to prevent your Firebase project from being compromised.
+
 Create a `.env` file in the `backend/` directory:
 
 ```env
@@ -140,6 +143,9 @@ python app.py
 cd frontend
 npm install
 ```
+
+> [!CAUTION]
+> **Security Risk:** Ensure your `frontend/.env` is also added to your `frontend/.gitignore`. While Vite public variables are visible in the browser, keeping your `.env` out of version control prevents accidental exposure of other sensitive config details.
 
 Create a `.env` file in the `frontend/` directory:
 
@@ -186,11 +192,13 @@ User Visits App
                     Protected API Routes Unlocked
 ```
 
-1. All new users must initiate registration via **Google Sign-In**
-2. New accounts are intercepted and required to set a **custom username and password**
-3. Credentials are linked to the Google profile via Firebase's `linkWithCredential`
-4. Users can subsequently authenticate via **either** Google OAuth or their custom username/password
-5. All API routes are protected with **Bearer Token authentication**, verified server-side by the Firebase Admin SDK
+### Step-by-Step Breakdown
+
+- **1. Initial Registration:** All new users must initiate registration via Google Sign-In.
+- **2. Forced Setup:** New accounts are intercepted and required to set a custom username and password.
+- **3. Credential Linking:** Credentials are securely linked to the Google profile via Firebase's `linkWithCredential`.
+- **4. Dual Login Paths:** Users can subsequently authenticate via *either* Google OAuth or their custom username/password.
+- **5. Secure API:** All API routes are protected with Bearer Token authentication, verified server-side by the Firebase Admin SDK.
 
 ---
 
@@ -205,6 +213,8 @@ fitfolio/
 │   │   ├── hooks/             # Custom React hooks
 │   │   ├── services/          # API and Firebase service layer
 │   │   └── styles/            # Global CSS variables and base styles
+│   ├── .env.example           # Example frontend environment variables
+│   ├── .gitignore             # Frontend git ignore rules
 │   └── vite.config.js
 │
 ├── backend/                   # Flask API
@@ -216,8 +226,11 @@ fitfolio/
 │   │   └── coach.py           # Generative AI coaching prompt pipeline
 │   ├── auth/
 │   │   └── middleware.py      # Firebase Admin SDK token verification
-│   └── requirements.txt
+│   ├── .env.example           # Example backend environment variables
+│   ├── .gitignore             # Backend git ignore rules (CRITICAL for serviceAccountKey.json)
+│   └── requirements.txt       # Python dependencies
 │
+├── .gitignore                 # Root git ignore rules
 └── README.md
 ```
 
