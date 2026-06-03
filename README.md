@@ -1,7 +1,6 @@
 <div align="center">
 
-<img width="1113" height="1370" alt="Untitled - 03 June 2026 at 17 41 16" src="https://github.com/user-attachments/assets/202552c7-6b62-413b-9c2d-7da2505a93c0" />
-
+<img width="120" alt="LuminaRole.ai Logo" src="https://github.com/user-attachments/assets/202552c7-6b62-413b-9c2d-7da2505a93c0" />
 
 # LuminaRole.ai
 
