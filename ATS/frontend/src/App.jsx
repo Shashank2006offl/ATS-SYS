@@ -97,7 +97,7 @@ export default function App() {
     
     // Fake email trick for Firebase
     const safeUsername = username.trim().toLowerCase();
-    const fakeEmail = `${safeUsername}@profilepulse.local`;
+    const fakeEmail = `${safeUsername}@luminarole.ai.local`;
 
     try {
       await signInWithEmailAndPassword(auth, fakeEmail, password);
