@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="1780476424805_Gemini_Generated_Image_uummbuummbuummbu-removebg-preview.png" alt="ProfilePulse Logo" width="120" />
+<img src="1780476424805_Gemini_Generated_Image_uummbuummbuummbu-removebg-preview.png" alt="ProfilePulse Logo" width="100" />
 
 # ProfilePulse
 
@@ -252,6 +252,12 @@ Contributions are welcome. Please open an issue first to discuss what you'd like
 If you found ProfilePulse useful, please consider starring the repository — it takes one second and makes a real difference in helping others discover the project.
 
 [![Star on GitHub](https://img.shields.io/github/stars/your-username/profilepulse?style=social)](https://github.com/your-username/profilepulse)
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for details.
 
 ---
 
