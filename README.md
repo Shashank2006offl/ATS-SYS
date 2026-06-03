@@ -1,6 +1,6 @@
 <div align="center">
 
-<img width="469" height="532" alt="Gemini_Generated_Image_uummbuummbuummbu-removebg-preview" src="https://github.com/user-attachments/assets/ba9496ba-f426-4039-abd0-75e2c1ca00a6" />
+<img src="1780476424805_Gemini_Generated_Image_uummbuummbuummbu-removebg-preview.png" alt="ProfilePulse Logo" width="120" />
 
 # ProfilePulse
 
