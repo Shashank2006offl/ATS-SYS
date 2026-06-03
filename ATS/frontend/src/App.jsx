@@ -278,7 +278,7 @@ export default function App() {
           <div className="form-card" style={{ maxWidth: '440px', width: '100%', padding: '40px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '32px' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '8px' }}>
-                <img src={logoImg} alt="LuminaRole.ai Logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ height: '36px', marginRight: '-12px', marginTop: '2px' }} />
+                <img src={logoImg} alt="LuminaRole.ai Logo" className="theme-logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ height: '36px', marginRight: '-12px', marginTop: '2px' }} />
                 <h2 className="hero__title" style={{ fontSize: '28px', marginBottom: 0, lineHeight: 1.2 }}>
                   Portal <span className="hero__accent">Login</span>
                 </h2>
@@ -380,7 +380,7 @@ export default function App() {
       <main className="main">
         {/* HERO */}
         <div className="hero" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <img src={logoImg} alt="LuminaRole.ai Logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ height: '100px', marginRight: '-20px', marginBottom: '12px' }} />
+          <img src={logoImg} alt="LuminaRole.ai Logo" className="theme-logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ height: '100px', marginRight: '-20px', marginBottom: '12px' }} />
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <h1 className="hero__title" style={{ marginBottom: '8px' }}>
               Resume <span className="hero__accent">Intelligence</span>
