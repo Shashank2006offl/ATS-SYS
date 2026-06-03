@@ -1,6 +1,6 @@
 <div align="center">
 
-<img width="120" alt="LuminaRole.ai Logo" src="https://github.com/user-attachments/assets/202552c7-6b62-413b-9c2d-7da2505a93c0" />
+<img width="100" alt="LuminaRole.ai Logo" src="https://github.com/user-attachments/assets/202552c7-6b62-413b-9c2d-7da2505a93c0" />
 
 # LuminaRole.ai
 
