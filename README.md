@@ -1,6 +1,8 @@
 <div align="center">
 
-# 🧠 ProfilePulse
+<img src="1780476424805_Gemini_Generated_Image_uummbuummbuummbu-removebg-preview.png" alt="ProfilePulse Logo" width="120" />
+
+# ProfilePulse
 
 ### *Resume Intelligence Platform*
 
