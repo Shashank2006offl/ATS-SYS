@@ -277,8 +277,8 @@ export default function App() {
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', background: 'radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 60%)' }}>
           <div className="form-card" style={{ maxWidth: '440px', width: '100%', padding: '40px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '32px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
-                <img src={logoImg} alt="LuminaRole.ai Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ height: '36px', marginBottom: 0 }} />
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '8px' }}>
+                <img src={logoImg} alt="LuminaRole.ai Logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ height: '36px', marginRight: '-12px', marginTop: '2px' }} />
                 <h2 className="hero__title" style={{ fontSize: '28px', marginBottom: 0, lineHeight: 1.2 }}>
                   Portal <span className="hero__accent">Login</span>
                 </h2>
@@ -380,8 +380,8 @@ export default function App() {
       <main className="main">
         {/* HERO */}
         <div className="hero">
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', marginBottom: '16px' }}>
-            <img src={logoImg} alt="LuminaRole.ai Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ height: '56px', marginBottom: 0 }} />
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
+            <img src={logoImg} alt="LuminaRole.ai Logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ height: '56px', marginRight: '-16px', marginTop: '4px' }} />
             <h1 className="hero__title" style={{ marginBottom: 0 }}>
               Resume <span className="hero__accent">Intelligence</span>
             </h1>
