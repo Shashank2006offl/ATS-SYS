@@ -255,12 +255,6 @@ If you found ProfilePulse useful, please consider starring the repository — it
 
 ---
 
-## 📄 License
-
-Distributed under the MIT License. See [`LICENSE`](LICENSE) for details.
-
----
-
 <div align="center">
 
 Built with 🧠 by the ProfilePulse team
