@@ -8,17 +8,21 @@ import {
 import { auth } from './firebase';
 import {
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
   onAuthStateChanged,
   signInWithPopup,
-  GoogleAuthProvider
+  GoogleAuthProvider,
+  updateProfile,
+  getAdditionalUserInfo,
+  EmailAuthProvider,
+  linkWithCredential,
+  signOut
 } from 'firebase/auth';
 
 import ScoreRing from './components/ScoreRing';
 import InsightCard from './components/InsightCard';
 import TagList from './components/TagList';
 import ActionList from './components/ActionList';
+import logoImg from './assets/logo.png';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
@@ -38,9 +42,11 @@ export default function App() {
   // Authentication States
   const [user, setUser]                   = useState(null);
   const [authLoading, setAuthLoading]     = useState(true);
-  const [email, setEmail]                 = useState('');
+  const [username, setUsername]           = useState('');
   const [password, setPassword]           = useState('');
-  const [isSignUp, setIsSignUp]           = useState(false);
+  const [needsSetup, setNeedsSetup]       = useState(false);
+  const [setupUsername, setSetupUsername] = useState('');
+  const [setupPassword, setSetupPassword] = useState('');
   const [authError, setAuthError]         = useState(null);
   const [authSubmitting, setAuthSubmitting] = useState(false);
 
@@ -66,25 +72,24 @@ export default function App() {
 
   const handleAuthSubmit = async (e) => {
     e.preventDefault();
-    if (!email.trim() || !password.trim()) {
+    if (!username.trim() || !password.trim()) {
       setAuthError('Please fill in all fields.');
       return;
     }
+    
     setAuthSubmitting(true);
     setAuthError(null);
+    
+    // Fake email trick for Firebase
+    const safeUsername = username.trim().toLowerCase();
+    const fakeEmail = `${safeUsername}@profilepulse.local`;
+
     try {
-      if (isSignUp) {
-        await createUserWithEmailAndPassword(auth, email, password);
-      } else {
-        await signInWithEmailAndPassword(auth, email, password);
-      }
+      await signInWithEmailAndPassword(auth, fakeEmail, password);
     } catch (err) {
       console.error(err);
       let cleanMsg = err.message;
-      if (err.code === 'auth/invalid-credential') cleanMsg = 'Invalid email or password.';
-      else if (err.code === 'auth/weak-password') cleanMsg = 'Password should be at least 6 characters.';
-      else if (err.code === 'auth/email-already-in-use') cleanMsg = 'This email is already in use.';
-      else if (err.code === 'auth/invalid-email') cleanMsg = 'Please enter a valid email address.';
+      if (err.code === 'auth/invalid-credential') cleanMsg = 'Invalid username or password.';
       setAuthError(cleanMsg);
     } finally {
       setAuthSubmitting(false);
@@ -95,13 +100,49 @@ export default function App() {
     setAuthSubmitting(true);
     setAuthError(null);
     const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({
+      prompt: 'select_account'
+    });
     try {
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      const details = getAdditionalUserInfo(result);
+      if (details?.isNewUser) {
+        setNeedsSetup(true);
+      }
     } catch (err) {
       console.error(err);
       setAuthError(err.message);
     } finally {
       setAuthSubmitting(false);
+    }
+  };
+
+  const handleSetupAccount = async (e) => {
+    e.preventDefault();
+    const safeUsername = setupUsername.trim();
+    if (!safeUsername) return;
+    
+    if (!/^[a-zA-Z0-9_]+$/.test(safeUsername)) {
+      setAuthError('Username can only contain letters, numbers, and underscores.');
+      return;
+    }
+    if (setupPassword.length < 6) {
+      setAuthError('Password must be at least 6 characters.');
+      return;
+    }
+    
+    setAuthError(null);
+    try {
+      const fakeEmail = `${safeUsername.toLowerCase()}@profilepulse.local`;
+      const credential = EmailAuthProvider.credential(fakeEmail, setupPassword);
+      await linkWithCredential(auth.currentUser, credential);
+      await updateProfile(auth.currentUser, { displayName: safeUsername });
+      setNeedsSetup(false);
+    } catch(err) {
+      console.error(err);
+      let cleanMsg = err.message;
+      if (err.code === 'auth/email-already-in-use') cleanMsg = 'This username is already taken.';
+      setAuthError(cleanMsg);
     }
   };
 
@@ -151,9 +192,48 @@ export default function App() {
   // 1. Loading Screen
   if (authLoading) {
     return (
-      <div className="auth-fullscreen-loader">
-        <Loader2 className="spin text-accent" size={48} />
-        <p>Loading Intelligence Portal...</p>
+      <div className="auth-fullscreen-loader" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <img src={logoImg} alt="ProfilePulse Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} style={{ marginBottom: 0 }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <Loader2 className="spin text-accent" size={24} />
+          <p>Loading Intelligence Portal...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // 1.5. Set Username Screen (For new Google users)
+  if (user && needsSetup) {
+    return (
+      <div className={`app${darkMode ? ' dark' : ''}`} style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', background: 'radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 60%)' }}>
+          <div className="form-card" style={{ maxWidth: '400px', width: '100%', padding: '40px', textAlign: 'center' }}>
+             <h2 className="hero__title" style={{ fontSize: '28px', marginBottom: '8px' }}>Setup Account</h2>
+             <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>Create a username and password to log in next time.</p>
+             <form onSubmit={handleSetupAccount} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+               <input
+                 type="text"
+                 className="textarea"
+                 style={{ height: 'auto', padding: '12px', textAlign: 'center' }}
+                 placeholder="Username (e.g. johndoe_123)"
+                 value={setupUsername}
+                 onChange={(e) => setSetupUsername(e.target.value)}
+                 required
+               />
+               <input
+                 type="password"
+                 className="textarea"
+                 style={{ height: 'auto', padding: '12px', textAlign: 'center' }}
+                 placeholder="Create a Password"
+                 value={setupPassword}
+                 onChange={(e) => setSetupPassword(e.target.value)}
+                 required
+               />
+               {authError && <div className="error-banner">{authError}</div>}
+               <button type="submit" className="btn-analyze">Complete Setup</button>
+             </form>
+          </div>
+        </div>
       </div>
     );
   }
@@ -165,7 +245,7 @@ export default function App() {
         {/* NAV */}
         <nav className="nav">
           <div className="nav__brand" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <img src="/logo.png" alt="ProfilePulse Logo" className="nav__logo" onError={(e) => e.target.style.display='none'} />
+            <img src={logoImg} alt="ProfilePulse Logo" className="nav__logo" onError={(e) => e.target.style.display='none'} />
             <span>ProfilePulse</span>
           </div>
           <button className="nav__toggle" onClick={() => setDarkMode(!darkMode)} aria-label="Toggle theme">
@@ -177,30 +257,42 @@ export default function App() {
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', background: 'radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 60%)' }}>
           <div className="form-card" style={{ maxWidth: '440px', width: '100%', padding: '40px' }}>
             <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-              <div style={{ display: 'inline-flex', padding: '12px', background: 'rgba(37,99,235,0.1)', borderRadius: '14px', color: '#2563eb', marginBottom: '16px' }}>
-                {isSignUp ? <UserPlus size={28} /> : <LogIn size={28} />}
-              </div>
+              <img src={logoImg} alt="ProfilePulse Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} />
               <h2 className="hero__title" style={{ fontSize: '28px', marginBottom: '8px', lineHeight: 1.2 }}>
-                {isSignUp ? 'Create' : 'Portal'} <span className="hero__accent">{isSignUp ? 'Account' : 'Login'}</span>
+                Portal <span className="hero__accent">Login</span>
               </h2>
               <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
-                {isSignUp ? 'Register to start analyzing professional profiles' : 'Enter your credentials to access ATS tools'}
+                Register with Google, or log in if you have an account.
               </p>
             </div>
 
+            {/* Primary Google Login Button */}
+            <button className="btn-reset" onClick={handleGoogleLogin} disabled={authSubmitting} style={{ width: '100%', padding: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', background: '#fff', color: '#000', borderRadius: '12px', cursor: 'pointer', transition: '0.2s', fontSize: '15px', fontWeight: 600, marginBottom: '24px' }}>
+              <svg width="20" height="20" viewBox="0 0 24 24">
+                <path fill="#EA4335" d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114-3.483 0-6.308-2.825-6.308-6.308s2.825-6.308 6.308-6.308c1.554 0 2.973.565 4.07 1.498l3.056-3.056C19.262 2.14 15.935 1 12.24 1 6.033 1 1 6.033 1 12.24s5.033 11.24 11.24 11.24c5.895 0 10.865-4.243 10.865-11.24 0-.763-.068-1.5-.2-1.955H12.24z"/>
+              </svg>
+              Continue with Google
+            </button>
+
+            <div style={{ display: 'flex', alignItems: 'center', margin: '24px 0', color: 'var(--text-muted)', fontSize: '13px' }}>
+              <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+              <span style={{ padding: '0 12px' }}>or log in with Username</span>
+              <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+            </div>
+
             <form onSubmit={handleAuthSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              {/* Email */}
+              {/* Username Field */}
               <div className="field">
-                <label className="field__label">Email Address</label>
+                <label className="field__label">Username</label>
                 <div style={{ position: 'relative' }}>
-                  <Mail size={16} style={{ position: 'absolute', left: '14px', top: '15px', color: 'var(--text-muted)' }} />
+                  <UserPlus size={16} style={{ position: 'absolute', left: '14px', top: '15px', color: 'var(--text-muted)' }} />
                   <input
-                    type="email"
+                    type="text"
                     className="textarea"
                     style={{ height: 'auto', padding: '12px 14px 12px 42px' }}
-                    placeholder="name@company.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="johndoe123"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     required
                   />
                 </div>
@@ -227,37 +319,12 @@ export default function App() {
 
               <button type="submit" className="btn-analyze" disabled={authSubmitting} style={{ marginTop: '8px' }}>
                 {authSubmitting ? (
-                  <><Loader2 className="spin" size={20} /> Connecting...</>
+                  <><Loader2 className="spin" size={20} /> Logging in...</>
                 ) : (
-                  isSignUp ? 'Sign Up' : 'Sign In'
+                  'Log In'
                 )}
               </button>
             </form>
-
-            <div style={{ display: 'flex', alignItems: 'center', margin: '24px 0', color: 'var(--text-muted)', fontSize: '13px' }}>
-              <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
-              <span style={{ padding: '0 12px' }}>or continue with</span>
-              <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
-            </div>
-
-            {/* Google Sign In */}
-            <button className="btn-reset" onClick={handleGoogleLogin} disabled={authSubmitting} style={{ width: '100%', padding: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', cursor: 'pointer', transition: '0.2s', fontSize: '14px', fontWeight: 500 }}>
-              <svg width="18" height="18" viewBox="0 0 24 24">
-                <path fill="#EA4335" d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114-3.483 0-6.308-2.825-6.308-6.308s2.825-6.308 6.308-6.308c1.554 0 2.973.565 4.07 1.498l3.056-3.056C19.262 2.14 15.935 1 12.24 1 6.033 1 1 6.033 1 12.24s5.033 11.24 11.24 11.24c5.895 0 10.865-4.243 10.865-11.24 0-.763-.068-1.5-.2-1.955H12.24z"/>
-              </svg>
-              Google Account
-            </button>
-
-            <div style={{ textAlign: 'center', marginTop: '28px', fontSize: '14px', color: 'var(--text-muted)' }}>
-              {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
-              <button
-                type="button"
-                onClick={() => { setIsSignUp(!isSignUp); setAuthError(null); }}
-                style={{ background: 'none', border: 'none', color: '#2563eb', cursor: 'pointer', fontWeight: 500, padding: 0 }}
-              >
-                {isSignUp ? 'Sign In' : 'Register Now'}
-              </button>
-            </div>
           </div>
         </div>
 
@@ -272,12 +339,12 @@ export default function App() {
       {/* NAV */}
       <nav className="nav">
         <div className="nav__brand" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <img src="/logo.png" alt="ProfilePulse Logo" className="nav__logo" onError={(e) => e.target.style.display='none'} />
+          <img src={logoImg} alt="ProfilePulse Logo" className="nav__logo" onError={(e) => e.target.style.display='none'} />
           <span>ProfilePulse</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <span style={{ fontSize: '13px', color: 'var(--text-muted)' }} className="hidden sm:inline">
-            Logged in as <strong style={{ color: 'var(--text)' }}>{user.email}</strong>
+            Logged in as <strong style={{ color: 'var(--text)' }}>{user.displayName || user.email}</strong>
           </span>
           <button className="nav__toggle" onClick={() => setDarkMode(!darkMode)} aria-label="Toggle theme" style={{ marginRight: '4px' }}>
             {darkMode ? <Sun size={18} /> : <Moon size={18} />}
@@ -291,6 +358,7 @@ export default function App() {
       <main className="main">
         {/* HERO */}
         <div className="hero">
+          <img src={logoImg} alt="ProfilePulse Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} />
           <h1 className="hero__title">
             Resume <span className="hero__accent">Intelligence</span>
           </h1>
