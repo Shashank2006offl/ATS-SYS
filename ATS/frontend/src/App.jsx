@@ -193,7 +193,7 @@ export default function App() {
   if (authLoading) {
     return (
       <div className="auth-fullscreen-loader" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-        <img src={logoImg} alt="ProfilePulse Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} style={{ marginBottom: 0 }} />
+        <img src={logoImg} alt="ProfilePulse Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ marginBottom: 0 }} />
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <Loader2 className="spin text-accent" size={24} />
           <p>Loading Intelligence Portal...</p>
@@ -245,7 +245,7 @@ export default function App() {
         {/* NAV */}
         <nav className="nav">
           <div className="nav__brand" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <img src={logoImg} alt="ProfilePulse Logo" className="nav__logo" onError={(e) => e.target.style.display='none'} />
+            <img src={logoImg} alt="ProfilePulse Logo" className="nav__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" />
             <span>ProfilePulse</span>
           </div>
           <button className="nav__toggle" onClick={() => setDarkMode(!darkMode)} aria-label="Toggle theme">
@@ -257,7 +257,7 @@ export default function App() {
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', background: 'radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 60%)' }}>
           <div className="form-card" style={{ maxWidth: '440px', width: '100%', padding: '40px' }}>
             <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-              <img src={logoImg} alt="ProfilePulse Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} />
+              <img src={logoImg} alt="ProfilePulse Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" />
               <h2 className="hero__title" style={{ fontSize: '28px', marginBottom: '8px', lineHeight: 1.2 }}>
                 Portal <span className="hero__accent">Login</span>
               </h2>
@@ -339,7 +339,7 @@ export default function App() {
       {/* NAV */}
       <nav className="nav">
         <div className="nav__brand" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <img src={logoImg} alt="ProfilePulse Logo" className="nav__logo" onError={(e) => e.target.style.display='none'} />
+          <img src={logoImg} alt="ProfilePulse Logo" className="nav__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" />
           <span>ProfilePulse</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -358,7 +358,7 @@ export default function App() {
       <main className="main">
         {/* HERO */}
         <div className="hero">
-          <img src={logoImg} alt="ProfilePulse Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} />
+          <img src={logoImg} alt="ProfilePulse Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" />
           <h1 className="hero__title">
             Resume <span className="hero__accent">Intelligence</span>
           </h1>
