@@ -82,6 +82,10 @@ html.dark .hero__logo { filter: brightness(0) invert(1); }
 
 /* ── HERO ── */
 .hero { text-align: center; margin-bottom: 48px; }
+.hero-grid { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; width: 100%; transform: translateX(24px); }
+.hero-grid__logo { justify-self: end; margin-right: -20px; }
+.hero-grid__logo img { height: 100px; margin-bottom: 12px; }
+.hero-grid__text { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .hero__title { font-size: 2.5rem; font-weight: 600; letter-spacing: -1px; margin-bottom: 12px; }
 .hero__accent { color: var(--text); } /* Removed gradient */
 .hero__sub { color: var(--text-sub); font-size: 1.05rem; }
@@ -218,6 +222,14 @@ html.dark .hero__logo { filter: brightness(0) invert(1); }
   .main { padding: 32px 16px; }
   .form-card { padding: 20px; }
   .hero__title { font-size: 2rem; }
+  
+  .hero-grid { display: flex; flex-direction: column; gap: 8px; transform: none; }
+  .hero-grid__logo { margin-right: 0; }
+  .hero-grid__logo img { height: 72px; margin-bottom: 0; }
+  .hero-grid__empty { display: none; }
+  
+  .nav__brand span { display: none; }
+  .results__header { flex-direction: column; gap: 16px; text-align: center; }
 }
 
 /* ── LANDING PAGE ── */
