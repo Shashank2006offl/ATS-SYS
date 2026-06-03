@@ -65,7 +65,7 @@ body { min-height: 100vh; }
   background: var(--bg-card);
 }
 .nav__brand { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.5px; display: flex; align-items: center; }
-.nav__logo { height: 44px; width: auto; object-fit: contain; border-radius: 4px; transition: all 0.2s; margin-right: -12px; }
+.nav__logo { height: 44px; width: auto; object-fit: contain; border-radius: 4px; transition: all 0.2s; margin-right: -24px; }
 html.dark .nav__logo { filter: brightness(0) invert(1); }
 .hero__logo { height: 120px; width: auto; object-fit: contain; margin-bottom: 24px; display: inline-block; animation: fadeIn 0.5s ease-out; }
 html.dark .hero__logo { filter: brightness(0) invert(1); }
@@ -252,7 +252,7 @@ html.dark .landing-app {
 .landing-nav__logo {
   height: 44px;
   width: auto;
-  margin-right: -8px;
+  margin-right: -20px;
 }
 
 .landing-nav__links {
