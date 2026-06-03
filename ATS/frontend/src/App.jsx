@@ -387,7 +387,7 @@ export default function App() {
             </h1>
           </div>
           <p className="hero__sub">
-            ML-powered ATS scoring + AI qualitative coaching in one pipeline
+            Analyse. Optimise. Succeed.
           </p>
         </div>
 

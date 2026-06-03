@@ -30,8 +30,7 @@ export default function LandingPage({ onSignIn }) {
             Your Career Visibility Matters
           </div>
           <h1 className="landing-hero__title">
-            Optimize Your Resume for <br/>
-            <span className="text-blue">Maximum Visibility</span>
+            Analyse. Optimise. <span className="hero-highlight">Succeed.</span>
           </h1>
           <p className="landing-hero__subtitle">
             Generic resumes rarely land on a recruiter's desk. Make your profile stand out, bypass Applicant Tracking Systems, and attract high-paying opportunities.
