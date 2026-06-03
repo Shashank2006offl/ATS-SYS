@@ -157,7 +157,7 @@ html.dark .hero__logo { filter: brightness(0) invert(1); }
   padding: 24px; display: flex; flex-direction: column; gap: 12px;
   box-shadow: var(--shadow);
 }
-.score-card { align-items: center; }
+.score-card, .salary-card { align-items: center; }
 .score-card__label, .salary-card__label, .insight-card__title { font-size: 0.85rem; font-weight: 500; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.5px; }
 
 .score-ring-wrapper { position: relative; width: 140px; height: 140px; }

@@ -528,7 +528,7 @@ export default function App() {
                 <div className="salary-card__icon"><DollarSign size={22} /></div>
                 <p className="salary-card__label">Predicted Market Salary</p>
                 <p className="salary-card__value">{results.salary ? `$${results.salary.toLocaleString()}` : 'N/A'}</p>
-                <p className="salary-card__sub">{results.salary ? 'Based on JD features & market data' : 'Model limited to Machine Learning roles'}</p>
+                <p className="salary-card__sub">{results.salary ? 'Based on JD features & market data' : 'Model limited to DS or ML roles'}</p>
               </div>
             </div>
 

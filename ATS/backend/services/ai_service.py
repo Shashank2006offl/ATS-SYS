@@ -14,9 +14,14 @@ def get_ai_insights(resume_text, jd_text):
     of the career objective, experience, skills, and framing.
     """
     prompt = f"""
-You are an expert ATS (Applicant Tracking System) and senior technical recruiter.
+You are a highly critical, expert ATS (Applicant Tracking System) and strict senior technical recruiter.
 
 Analyze the candidate's resume against the Job Description.
+
+CRITICAL SCORING RULES:
+1. BE RUTHLESS. If the resume is completely unrelated to the job description, or if either text contains random nonsensical words, the `ats_score` MUST be between 0 and 15.
+2. Do not give out high scores out of politeness. Only give scores above 75 to candidates who genuinely meet almost all core requirements.
+3. Heavily penalize missing mandatory skills or experience.
 
 Return ONLY valid JSON, no markdown, no conversational text. Exactly match this structure:
 
