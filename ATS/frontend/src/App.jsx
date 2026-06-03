@@ -276,11 +276,13 @@ export default function App() {
         {/* AUTH CONTENT */}
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', background: 'radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 60%)' }}>
           <div className="form-card" style={{ maxWidth: '440px', width: '100%', padding: '40px' }}>
-            <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-              <img src={logoImg} alt="LuminaRole.ai Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" />
-              <h2 className="hero__title" style={{ fontSize: '28px', marginBottom: '8px', lineHeight: 1.2 }}>
-                Portal <span className="hero__accent">Login</span>
-              </h2>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '32px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                <img src={logoImg} alt="LuminaRole.ai Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ height: '36px', marginBottom: 0 }} />
+                <h2 className="hero__title" style={{ fontSize: '28px', marginBottom: 0, lineHeight: 1.2 }}>
+                  Portal <span className="hero__accent">Login</span>
+                </h2>
+              </div>
               <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
                 Register with Google, or log in if you have an account.
               </p>
@@ -378,10 +380,12 @@ export default function App() {
       <main className="main">
         {/* HERO */}
         <div className="hero">
-          <img src={logoImg} alt="LuminaRole.ai Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" />
-          <h1 className="hero__title">
-            Resume <span className="hero__accent">Intelligence</span>
-          </h1>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', marginBottom: '16px' }}>
+            <img src={logoImg} alt="LuminaRole.ai Logo" className="hero__logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ height: '56px', marginBottom: 0 }} />
+            <h1 className="hero__title" style={{ marginBottom: 0 }}>
+              Resume <span className="hero__accent">Intelligence</span>
+            </h1>
+          </div>
           <p className="hero__sub">
             ML-powered ATS scoring + AI qualitative coaching in one pipeline
           </p>
