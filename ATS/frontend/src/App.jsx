@@ -379,7 +379,7 @@ export default function App() {
 
       <main className="main">
         {/* HERO */}
-        <div className="hero" style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', width: '100%' }}>
+        <div className="hero" style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', width: '100%', transform: 'translateX(24px)' }}>
           <div style={{ justifySelf: 'end', marginRight: '-20px' }}>
             <img src={logoImg} alt="LuminaRole.ai Logo" className="theme-logo" onError={(e) => e.target.style.display='none'} fetchPriority="high" style={{ height: '100px', marginBottom: '12px' }} />
           </div>
